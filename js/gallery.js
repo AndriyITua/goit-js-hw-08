@@ -66,15 +66,13 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 let html = '';
-
-function createImage() {
-  
-}
+let id = 0;
 
 for (const image of images) {
-    const { preview, original, description } = image;
-    html += `
-    <li class="gallery-item">
+  const { preview, original, description } = image;
+  id++;
+  html += `
+    <li class="gallery-item" data-id=${id}>
         <a class="gallery-link" href="${original}">
             <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}"/>
         </a>
@@ -83,10 +81,33 @@ for (const image of images) {
 }
 gallery.innerHTML = html;
 
+// const galleryItem = document.querySelectorAll('.gallery-item');
+
+// galleryItem.forEach((item) => {
+//   item.addEventListener('click', (event) => {
+//     event.preventDefault()
+//     const id = event.currentTarget.dataset.id;
+//     console.log(id);
+
+//     let info = images.find(item => item.id === id);
+//     console.log(info);
+//     basicLightbox.create(
+//       `<div class="modal">
+//             <img src="" alt="">
+//         </div>`
+//     )
+//   })
+// })
+
+
 function clickImage(event) {
   event.preventDefault()
   if (event.target != document.querySelector('.gallery')) {
-    console.log(event.target);
+    basicLightbox.create(
+      `<div class="modal">
+            <img src="${event.target.dataset.source}" alt="${event.target.alt}">
+        </div>`
+    ).show()
   }
 }
 
