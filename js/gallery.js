@@ -79,9 +79,11 @@ for (const image of images) {
 }
 gallery.innerHTML = html;
 
+const galleryImg = document.querySelector('.gallery-image')
+
 function clickImage(event) {
   event.preventDefault()
-  if (event.target != document.querySelector('.gallery')) {
+  if (event.target.className === galleryImg.className) {
     basicLightbox.create(
       `<div class="modal">
             <img src="${event.target.dataset.source}" alt="${event.target.alt}">
